@@ -1,6 +1,6 @@
 /***********************************************************************************
-	SimpleStateMachine - TEMPLATE
-	by Scott Kildall
+	SimpleStateMachine + Splash/Instructions
+	by Cellini Luong
 
 	Template:
 
@@ -34,6 +34,12 @@
 // Array of images
 var images = [];
 
+// Array of strings
+var strings = [];
+var midX;
+var startY;
+var lineHeight = 24;
+
 // variable that is a function 
 var drawFunction;
 
@@ -58,6 +64,12 @@ function setup() {
   imageMode(CENTER);
   textAlign(CENTER);
   textSize(24);
+
+  // Assigning values to global variables
+  midX = width/2;
+  startY = height/4;
+
+  loadStringArray();
 
   // set to one for startup
   drawFunction = drawSplash;
@@ -127,6 +139,26 @@ drawSplash = function() {
    text("French Toast", width/2, height - gTextOffset);
 }
 
+//-- drawInstructions() will draw the strings from the array
+drawInstructions = function() {
+   background(0);
+
+  fill(255);
+  for( let i = 0 ; i < strings.length; i++ ) {
+      text( strings[i], midX, startY + (i * lineHeight) )
+  }
+}
+
+// loading my instructions as strings
+function loadStringArray() {
+  strings[0] = "Press 1 for anxiety"; 
+  strings[1] = "Press 2 for happiness"; 
+  strings[2] = "Press 3 for stress"; 
+  strings[3] = "Press 4 for excitement"; 
+  strings[4] = "Press 5 for energy"; 
+  strings[5] = "Press s for french toast";
+
+}
 //========= TEMPLATE: add or change interface functions, as you like =========
 
 // Change the drawFunction variable based on your interaction
@@ -151,8 +183,9 @@ function keyTyped() {
   }
 }
 
-function mousePressed(){
+function mousePressed() {
   if( drawFunction === drawSplash ){
-    drawFunction = drawOne;
+    drawFunction = drawInstructions;
   }
+
 }
