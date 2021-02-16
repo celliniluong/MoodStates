@@ -47,6 +47,7 @@ function preload() {
   images[2] = loadImage('assets/three.png');
   images[3] = loadImage('assets/four.png');
   images[4] = loadImage('assets/five.png');
+  images[5] = loadImage('assets/splash.png');
 }
 
 // Center drawing, drawFunction will be one for default
@@ -59,7 +60,7 @@ function setup() {
   textSize(24);
 
   // set to one for startup
-  drawFunction = drawOne;
+  drawFunction = drawSplash;
 }
 
 // Very simple, sets the background color and calls your state machine function
@@ -117,6 +118,14 @@ drawFive = function() {
    text("Energy", width/2, height - gTextOffset);
 }
 
+//-- drawSplash() will draw the image at index 5 from the array
+drawSplash = function() {
+   background(0);
+   image(images[5],width/2, height/2);
+
+   fill(255);
+   text("French Toast", width/2, height - gTextOffset);
+}
 
 //========= TEMPLATE: add or change interface functions, as you like =========
 
@@ -136,5 +145,14 @@ function keyTyped() {
   }
   else if( key === '5' ) {
   	drawFunction = drawFive;
+  }
+  else if( key === 's' ) {
+    drawFunction = drawSplash;
+  }
+}
+
+function mousePressed(){
+  if( drawFunction === drawSplash ){
+    drawFunction = drawOne;
   }
 }
